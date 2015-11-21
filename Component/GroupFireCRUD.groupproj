@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D0EBCF1B-C01F-44F2-9F67-F5BD7A15E0CD}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="FireCRUD.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="_Test\FireCRUD_Test.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="FireCRUD">
+        <MSBuild Projects="FireCRUD.dproj"/>
+    </Target>
+    <Target Name="FireCRUD:Clean">
+        <MSBuild Projects="FireCRUD.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FireCRUD:Make">
+        <MSBuild Projects="FireCRUD.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FireCRUD_Test">
+        <MSBuild Projects="_Test\FireCRUD_Test.dproj"/>
+    </Target>
+    <Target Name="FireCRUD_Test:Clean">
+        <MSBuild Projects="_Test\FireCRUD_Test.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FireCRUD_Test:Make">
+        <MSBuild Projects="_Test\FireCRUD_Test.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="FireCRUD;FireCRUD_Test"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="FireCRUD:Clean;FireCRUD_Test:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="FireCRUD:Make;FireCRUD_Test:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
