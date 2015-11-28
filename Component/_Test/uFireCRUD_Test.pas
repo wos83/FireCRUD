@@ -29,7 +29,8 @@ uses
    System.Bindings.Outputs,
    FMX.Bind.Editors,
    Data.Bind.EngExt,
-   FMX.Bind.DBEngExt;
+   FMX.Bind.DBEngExt,
+   MultiDetailAppearanceU;
 
 type
    TfrmFireCRUD_Teste = class(TForm)
@@ -60,6 +61,8 @@ type
       procedure swtDS_SENHA_InsClick(Sender: TObject);
       procedure edtDS_LOGIN_UpdTyping(Sender: TObject);
       procedure swtDS_SENHA_UpdClick(Sender: TObject);
+      procedure FormShow(Sender: TObject);
+      procedure tbcCRUDChange(Sender: TObject);
    private
       { Private declarations }
    public
@@ -95,6 +98,9 @@ begin
 
          try
             crudSQL.ExecSQL;
+
+            tbcCRUD.ActiveTab := tbiSelect;
+
          except
             on E: Exception do
             begin
@@ -132,6 +138,21 @@ begin
    {$ENDIF}
 end;
 
+procedure TfrmFireCRUD_Teste.FormShow(Sender: TObject);
+begin
+   DM.FDConn.Close;
+   DM.FDConn.Open;
+
+   DM.FireCRUD.Close;
+   DM.FireCRUD.SQL.Text := 'SELECT * FROM TB_LOGIN ORDER BY DS_LOGIN';
+   DM.FireCRUD.Open;
+
+   bsCRUD.DataSet.Close;
+   bsCRUD.DataSet.Open;
+
+   lnkCRUD.FillList;
+end;
+
 procedure TfrmFireCRUD_Teste.swtDS_SENHA_InsClick(Sender: TObject);
 begin
    edtDS_SENHA_Ins.Password := //
@@ -142,6 +163,15 @@ procedure TfrmFireCRUD_Teste.swtDS_SENHA_UpdClick(Sender: TObject);
 begin
    edtDS_SENHA_Upd.Password := //
       not TSwitch(Sender).IsChecked;
+end;
+
+procedure TfrmFireCRUD_Teste.tbcCRUDChange(Sender: TObject);
+begin
+   if (TTabControl(Sender).ActiveTab = tbiSelect) then
+   begin
+      DM.FireCRUD.Close;
+      DM.FireCRUD.Open;
+   end;
 end;
 
 end.
