@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015/11/21 17:33:19.000.420,=rtl.dcp</Transaction>
+    <Transaction>2015/11/21 17:33:33.000.282,C:\Users\Dell-Vostro-1520\Documents\Embarcadero\Studio\Projects\FireCRUD.dproj=C:\Users\Dell-Vostro-1520\Documents\Embarcadero\Studio\Projects\Package1.dproj</Transaction>
+    <Transaction>2015/11/21 17:33:48.000.905,C:\Temp\CriacaoComponentes\Training\FireCRUD\Component\FireCRUD.dproj=C:\Users\Dell-Vostro-1520\Documents\Embarcadero\Studio\Projects\FireCRUD.dproj</Transaction>
+    <Transaction>2015/11/21 17:34:15.000.610,=C:\Temp\CriacaoComponentes\Training\FireCRUD\Component\FireCRUD.pas</Transaction>
+    <Transaction>2015/11/21 17:43:08.000.811,=FireDACCommonDriver.dcp</Transaction>
+    <Transaction>2015/11/21 17:43:08.000.832,=FireDACCommon.dcp</Transaction>
+    <Transaction>2015/11/21 17:43:08.000.790,=FireDAC.dcp</Transaction>
+    <Transaction>2015/11/21 17:43:08.000.770,=dbrtl.dcp</Transaction>
+  </Transactions>
+</BorlandProject>

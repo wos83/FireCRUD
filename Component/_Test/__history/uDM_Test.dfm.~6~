@@ -1,0 +1,44 @@
+object DM: TDM
+  OldCreateOrder = False
+  Height = 351
+  Width = 442
+  object FDConn: TFDConnection
+    Params.Strings = (
+      
+        'Database=C:\Temp\CriacaoComponentes\Training\FireCRUD\Database\F' +
+        'ireCRUD.sqlite'
+      'LockingMode=Normal'
+      'DriverID=SQLite')
+    LoginPrompt = False
+    Left = 88
+    Top = 24
+  end
+  object FireCRUD1: TFireCRUD
+    Connection = FDConn
+    TypeCRUD = tcInsert
+    TableCRUD = 'TB_LOGIN'
+    Left = 88
+    Top = 80
+  end
+  object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
+    Left = 320
+    Top = 8
+  end
+  object FDGUIxWaitCursor: TFDGUIxWaitCursor
+    Provider = 'FMX'
+    Left = 320
+    Top = 56
+  end
+  object FDStanStorageJSONLink1: TFDStanStorageJSONLink
+    Left = 320
+    Top = 104
+  end
+  object FDStanStorageBinLink1: TFDStanStorageBinLink
+    Left = 320
+    Top = 152
+  end
+  object FDStanStorageXMLLink1: TFDStanStorageXMLLink
+    Left = 320
+    Top = 200
+  end
+end

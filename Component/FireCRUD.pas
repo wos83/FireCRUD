@@ -7,12 +7,10 @@ uses
    System.Classes,
    Data.DB,
    FireDAC.Comp.DataSet,
-   FireDAC.Comp.Client;
+   FireDAC.Comp.Client,
+   uGlobal;
 
 type
-   { todo: Tipos de CRUD }
-   CRUD = (tcNone, tcInsert, tcUpdate, tcDelete);
-
    { todo: Classe do CRUD }
    TFireCRUD = class(TFDQuery)
    private
@@ -23,10 +21,10 @@ type
       FSQL: string;
       { Private declarations }
    protected
-      function Executed: Boolean;
       { Protected declarations }
    public
       constructor Create(AOwner: TComponent); override;
+      procedure SetSQL;
       { Public declarations }
    published
       { todo: Propriedades do CRUD na IDE (Object Inspector) }
@@ -39,6 +37,11 @@ procedure Register;
 
 implementation
 
+function GetUTC: string;
+begin
+   Result := FormatDateTime('yyyymmddhhnnsszzz', Now);
+end;
+
 procedure Register;
 begin
    RegisterComponents('Training', [TFireCRUD]);
@@ -49,41 +52,75 @@ end;
 constructor TFireCRUD.Create(AOwner: TComponent);
 begin
    inherited;
+   Self.Name := 'fireCRUD_' + GetUTC;
    Self.Close;
    Self.SQL.Text := EmptyStr;
 end;
 
-function TFireCRUD.Executed: Boolean;
+procedure TFireCRUD.SetSQL;
 var
-   slFields: TStringList;
-   strGetFieldNames: string;
+   SL: TStringList;
+   i: integer;
 begin
-   Self.Table.Name := Self.TableCRUD;
+   FSQL := Format('SELECT * FROM %s ', [Self.TableCRUD]);
+   Self.Open(FSQL);
 
-   Self.GetFieldNames(slFields);
-   strGetFieldNames := slFields.Text;
-   slFields.SaveToFile('GetFieldNames.txt');
+   SL := TStringList.Create;
+
+   try
+      Self.GetFieldNames(SL);
+      {$IFDEF DEBUG}
+      SL.SaveToFile('GetFieldNames.txt');
+      {$ENDIF}
+   finally
+
+   end;
 
    case FTypeCRUD of
       tcNone:
          begin
-            FSQL := '';
+            FSQL := Format('SELECT * FROM %s ', [Self.TableCRUD]);
          end;
       tcInsert:
          begin
-            FSQL := '';
+            FSQL := 'INSERT INTO ' + Self.TableCRUD + '(';
+
+            { todo: Recupera os campos da tabela }
+            for i := 1 to SL.Count - 1 do
+            begin
+               FSQL := FSQL + SL[i] + ', ';
+            end;
+
+            FSQL := Copy(FSQL, 1, Length(FSQL) - 2) + ') VALUES (';
+
+            { todo: Monta os parametros da tabela }
+            for i := 1 to SL.Count - 1 do
+            begin
+               FSQL := FSQL + ':' + SL[i] + ', ';
+            end;
+
+            FSQL := Copy(FSQL, 1, Length(FSQL) - 2) + ')';
+
+            {$IFDEF DEBUG}
+            SL.Text := FSQL;
+            SL.SaveToFile('CRUD_Insert.sql');
+            {$ENDIF}
          end;
 
       tcUpdate:
          begin
-            FSQL := '';
+            //FSQL := Format('UPDATE %s SET ', [Self.TableCRUD]);
+
          end;
 
       tcDelete:
          begin
-            FSQL := '';
+            Format('DELETE FROM %s ', [Self.TableCRUD]);
          end;
    end;
+
+   { todo: Configura a instrução SQL }
+   Self.SQL.Text := FSQL;
 end;
 
 end.
