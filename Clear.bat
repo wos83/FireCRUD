@@ -1,0 +1,30 @@
+@echo off
+
+del /s __history/
+del /s *.~*
+del /s *.exe
+del /s *.dll
+del /s *.bpl
+del /s *.bpi
+del /s *.dcp
+del /s *.so
+del /s *.apk
+del /s *.drc
+del /s *.map
+del /s *.dres
+del /s *.rsm
+del /s *.tds
+del /s *.dcu
+del /s *.lib
+del /s *.cfg
+del /s *Resource.rc
+del /s *.local
+del /s *.identcache
+del /s *.projdata
+del /s *.tvsconfig
+del /s *.dsk
+del /s *.stat
+del /s *.vlb
+del /s *.ddp
+del /s *.tlb
+del /s *.res
