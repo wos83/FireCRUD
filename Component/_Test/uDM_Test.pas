@@ -12,7 +12,6 @@ uses
 
 type
   TDM = class(TDataModule)
-    FireCRUD: TFireCRUD;
     FDConn: TFDConnection;
   private
     { Private declarations }

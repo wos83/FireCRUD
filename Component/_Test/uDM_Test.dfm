@@ -2,11 +2,6 @@ object DM: TDM
   OldCreateOrder = False
   Height = 351
   Width = 442
-  object FireCRUD: TFireCRUD
-    TypeCRUD = None
-    Left = 88
-    Top = 72
-  end
   object FDConn: TFDConnection
     Params.Strings = (
       

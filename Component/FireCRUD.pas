@@ -10,10 +10,13 @@ uses
    FireDAC.Comp.Client;
 
 type
-   CRUD = (None, Insert, Update, Delete);
+   { todo: Tipos de CRUD }
+   CRUD = (tcNone, tcInsert, tcUpdate, tcDelete);
 
+   { todo: Classe do CRUD }
    TFireCRUD = class(TFDQuery)
    private
+      { todo: Variáveis auxiliares da classe }
       FTypeCRUD: CRUD;
       FTable: string;
       FKey: integer;
@@ -26,8 +29,9 @@ type
       constructor Create(AOwner: TComponent); override;
       { Public declarations }
    published
-      property TypeCRUD: CRUD read FTypeCRUD write FTypeCRUD default None;
-      property TableCRUD: string read FTable write FTable default EmptyStr;
+      { todo: Propriedades do CRUD na IDE (Object Inspector) }
+      property TypeCRUD: CRUD read FTypeCRUD write FTypeCRUD default tcNone;
+      property TableCRUD: string read FTable write FTable;
       { Published declarations }
    end;
 
@@ -52,23 +56,30 @@ end;
 function TFireCRUD.Executed: Boolean;
 var
    slFields: TStringList;
+   strGetFieldNames: string;
 begin
    Self.Table.Name := Self.TableCRUD;
 
    Self.GetFieldNames(slFields);
+   strGetFieldNames := slFields.Text;
+   slFields.SaveToFile('GetFieldNames.txt');
 
    case FTypeCRUD of
-      Insert:
+      tcNone:
+         begin
+            FSQL := '';
+         end;
+      tcInsert:
          begin
             FSQL := '';
          end;
 
-      Update:
+      tcUpdate:
          begin
             FSQL := '';
          end;
 
-      Delete:
+      tcDelete:
          begin
             FSQL := '';
          end;
