@@ -1,21 +1,246 @@
-object Form1: TForm1
+object frmFireCRUD_Teste: TfrmFireCRUD_Teste
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'FireCRUD Test'
   ClientHeight = 480
   ClientWidth = 360
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
   DesignerMasterStyle = 3
-  object Button1: TButton
-    Position.X = 56.000000000000000000
-    Position.Y = 32.000000000000000000
-    Size.Width = 185.000000000000000000
-    Size.Height = 44.000000000000000000
+  object tbcCRUD: TTabControl
+    Align = Client
+    FullSize = True
+    Size.Width = 360.000000000000000000
+    Size.Height = 432.000000000000000000
     Size.PlatformDefault = False
+    TabHeight = 49.000000000000000000
+    TabIndex = 2
     TabOrder = 0
-    Text = 'Button1'
-    OnClick = Button1Click
+    TabPosition = PlatformDefault
+    object tbiSelect: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 120.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'SELECT'
+      object lstvCRUD: TListView
+        ItemAppearanceClassName = 'TListItemAppearance'
+        ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+        HeaderAppearanceClassName = 'TListHeaderObjects'
+        FooterAppearanceClassName = 'TListHeaderObjects'
+        Align = Client
+        Size.Width = 360.000000000000000000
+        Size.Height = 383.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
+    end
+    object tbiInsert: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 120.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'INSERT'
+      object lblDS_LOGIN_Ins: TLabel
+        Align = Top
+        Margins.Left = 16.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 16.000000000000000000
+        Position.X = 16.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 328.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'LOGIN'
+      end
+      object edtDS_LOGIN_Ins: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 2
+        Position.X = 16.000000000000000000
+        Position.Y = 39.000000000000000000
+        Margins.Left = 16.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 16.000000000000000000
+        Size.Width = 328.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = '  LOGIN'
+        KillFocusByReturn = True
+        OnTyping = edtDS_LOGIN_InsTyping
+      end
+      object lblDS_SENHA_Ins: TLabel
+        Align = Top
+        Margins.Left = 16.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 16.000000000000000000
+        Position.X = 16.000000000000000000
+        Position.Y = 79.000000000000000000
+        Size.Width = 328.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'PASSWORD'
+      end
+      object edtDS_SENHA_Ins: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 1
+        Password = True
+        Position.X = 16.000000000000000000
+        Position.Y = 110.000000000000000000
+        Margins.Left = 16.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 16.000000000000000000
+        Size.Width = 328.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = '  PASSWORD'
+        KillFocusByReturn = True
+        object swtDS_SENHA_Ins: TSwitch
+          Align = Right
+          IsChecked = False
+          Position.X = 284.000000000000000000
+          Position.Y = 3.000000000000000000
+          Size.Width = 44.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          OnClick = swtDS_SENHA_InsClick
+        end
+      end
+    end
+    object tbiUpdate: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 120.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'UPDATE'
+      object edtDS_LOGIN_Upd: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 2
+        Position.X = 16.000000000000000000
+        Position.Y = 39.000000000000000000
+        Margins.Left = 16.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 16.000000000000000000
+        Size.Width = 328.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = '  LOGIN'
+        KillFocusByReturn = True
+        OnTyping = edtDS_LOGIN_UpdTyping
+      end
+      object edtDS_SENHA_Upd: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 1
+        Password = True
+        Position.X = 16.000000000000000000
+        Position.Y = 110.000000000000000000
+        Margins.Left = 16.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 16.000000000000000000
+        Size.Width = 328.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = '  PASSWORD'
+        KillFocusByReturn = True
+        object swtDS_SENHA_Upd: TSwitch
+          Align = Right
+          IsChecked = False
+          Position.X = 284.000000000000000000
+          Position.Y = 3.000000000000000000
+          Size.Width = 44.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          OnClick = swtDS_SENHA_UpdClick
+        end
+      end
+      object lblDS_LOGIN_Upd: TLabel
+        Align = Top
+        Margins.Left = 16.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 16.000000000000000000
+        Position.X = 16.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 328.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'LOGIN'
+      end
+      object lblDS_SENHA_Upd: TLabel
+        Align = Top
+        Margins.Left = 16.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 16.000000000000000000
+        Position.X = 16.000000000000000000
+        Position.Y = 79.000000000000000000
+        Size.Width = 328.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'PASSWORD'
+      end
+    end
+  end
+  object tlbCRUD: TToolBar
+    Size.Width = 360.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object btnCRUD: TButton
+      Align = Right
+      Position.X = 312.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'donetoolbutton'
+      TabOrder = 0
+      OnClick = btnCRUDClick
+    end
+    object lblCRUD: TLabel
+      Align = Client
+      Margins.Left = 16.000000000000000000
+      Size.Width = 296.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toollabel'
+      TextSettings.Trimming = None
+      Text = 'CRUD'
+    end
+  end
+  object bsCRUD: TBindSourceDB
+    ScopeMappings = <>
+    Left = 264
+    Top = 120
+  end
+  object blCRUD: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 264
+    Top = 168
+    object lnkCRUD: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = bsCRUD
+      Control = lstvCRUD
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
   end
 end

@@ -279,7 +279,7 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="uFireCRUD_Test.pas">
-            <Form>Form1</Form>
+            <Form>frmFireCRUD_Teste</Form>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

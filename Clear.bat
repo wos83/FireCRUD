@@ -7,8 +7,11 @@ del /s *.dll
 del /s *.bpl
 del /s *.bpi
 del /s *.dcp
+del /s *.o
+del /s *.dex
 del /s *.so
 del /s *.apk
+del /s *.ipa
 del /s *.drc
 del /s *.map
 del /s *.dres

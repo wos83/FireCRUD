@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject>
-	<Transactions>
-    <Transaction>2015/11/21 17:34:08.000.880,C:\Temp\CriacaoComponentes\Training\FireCRUD\Component\GroupFireCRUD.groupproj=C:\Users\Dell-Vostro-1520\Documents\Embarcadero\Studio\Projects\ProjectGroup1.groupproj</Transaction>
-  </Transactions>
-	<Default.Personality>
-		<Projects ActiveProject="C:\Temp\CriacaoComponentes\FireCRUD\Component\_Test\FireCRUD_Test.dproj"/>
-	</Default.Personality>
-</BorlandProject>

@@ -62,7 +62,7 @@ var
    SL: TStringList;
    i: integer;
 begin
-   FSQL := Format('SELECT * FROM %s ', [Self.TableCRUD]);
+   FSQL := Format('SELECT * FROM %s LIMIT 1', [Self.TableCRUD]);
    Self.Open(FSQL);
 
    SL := TStringList.Create;
@@ -83,12 +83,15 @@ begin
          end;
       tcInsert:
          begin
-            FSQL := 'INSERT INTO ' + Self.TableCRUD + '(';
+            {$REGION 'tcInsert'}
+            // FSQL := 'INSERT INTO ' + Self.TableCRUD + '(';
+            FSQL := Format('INSERT INTO %s (', [Self.TableCRUD]);
 
             { todo: Recupera os campos da tabela }
             for i := 1 to SL.Count - 1 do
             begin
-               FSQL := FSQL + SL[i] + ', ';
+               // FSQL := FSQL + SL[i] + ', ';
+               FSQL := FSQL + Format('%s, ', [SL[i]]);
             end;
 
             FSQL := Copy(FSQL, 1, Length(FSQL) - 2) + ') VALUES (';
@@ -96,7 +99,8 @@ begin
             { todo: Monta os parametros da tabela }
             for i := 1 to SL.Count - 1 do
             begin
-               FSQL := FSQL + ':' + SL[i] + ', ';
+               // FSQL := FSQL + ':' + SL[i] + ', ';
+               FSQL := FSQL + Format(':%s, ', [SL[i]]);
             end;
 
             FSQL := Copy(FSQL, 1, Length(FSQL) - 2) + ')';
@@ -105,17 +109,41 @@ begin
             SL.Text := FSQL;
             SL.SaveToFile('CRUD_Insert.sql');
             {$ENDIF}
+            {$ENDREGION}
          end;
 
       tcUpdate:
          begin
-            //FSQL := Format('UPDATE %s SET ', [Self.TableCRUD]);
+            {$REGION 'tcUpdate'}
+            FSQL := Format('UPDATE %s SET ', [Self.TableCRUD]);
 
+            for i := 1 to SL.Count - 1 do
+            begin
+               // FSQL := FSQL + SL[i] + ' = :' + SL[i] + ', ';
+               FSQL := FSQL + Format('%s = :%s, ', [SL[i]]);
+            end;
+
+            FSQL := Copy(FSQL, 1, Length(FSQL) - 2);
+            // FSQL := FSQL + ' WHERE ' + SL[0] + ' = :' + SL[0];
+            FSQL := FSQL + Format('WHERE %s = :%s, ', [SL[0]]);
+
+            {$IFDEF DEBUG}
+            SL.Text := FSQL;
+            SL.SaveToFile('CRUD_Update.sql');
+            {$ENDIF}
+            {$ENDREGION}
          end;
 
       tcDelete:
          begin
-            Format('DELETE FROM %s ', [Self.TableCRUD]);
+            FSQL := Format('DELETE FROM %s ', [Self.TableCRUD]);
+            // FSQL := FSQL + ' WHERE ' + SL[0] + ' = :' + SL[0];
+            FSQL := FSQL + Format('WHERE %s = :%s, ', [SL[0]]);
+
+            {$IFDEF DEBUG}
+            SL.Text := FSQL;
+            SL.SaveToFile('CRUD_Delete.sql');
+            {$ENDIF}
          end;
    end;
 
